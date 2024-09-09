@@ -4,10 +4,17 @@
 	"description": "",
 	"main": "main.js",
 	"scripts": {
-	  "start": "exec node main.js"
+		"start": "exec node main.js",
+    "build": "", // Replace with your actual build script
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
 	},
 	"dependencies": {
-	  "express": "^4.17.1",
-	  "axios": "^0.21.1"
+		"axios": "^0.21.1",
+		"express": "^4.17.1"
+	},
+	"homepage": "https://R0gue-one.github.io/ImageSage",
+	"devDependencies": {
+		"gh-pages": "^6.1.1"
 	}
 }
