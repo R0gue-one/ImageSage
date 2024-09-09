@@ -23,7 +23,7 @@ async function getQuote() {
 }
 
 app.get('/', async (req, res) => {
-
+try{
     if (!process.env.UNSPLASH_ACCESS_KEY) {
       console.error('UNSPLASH_ACCESS_KEY is not set');
       process.exit(1);
@@ -37,7 +37,8 @@ app.get('/', async (req, res) => {
     ]);
 
     const imageUrl = imageResponse.data.urls.regular;
-    
+    const photographerName = imageResponse.data.user.name;
+    const photographerProfileUrl = imageResponse.data.user.links.html;  
   
     res.send(`<!DOCTYPE html>
       <html lang="en">
@@ -51,11 +52,16 @@ app.get('/', async (req, res) => {
           <h2  style="text-align: center">Images with worthless wosdom</h2>
           <div style="text-align: center;">
               <img src="${imageUrl}" alt="Random Image" style="max-width: 100%; height: auto;">
-              <p>${quote}</p>
+              <p class="credit" style="font-size: 12px">Photo by <a href="${photographerProfileUrl}" target="_blank">${photographerName}</a> on <a href="https://unsplash.com" target="_blank">Unsplash</a></p>
+              <p style="font-size: 36px;">${quote}</p>
           </div>
       </body>
       </html>`);
- 
+} catch(error){
+    console.log(error);
+    res.status(501).send(`<body>Image sage seems to be out of wisdom!</body>`);
+  }
+
 });
 
 app.listen(3000, () => {
