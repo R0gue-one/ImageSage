@@ -1,4 +1,4 @@
-const UNSPLASH_ACCESS_KEY = 'YOUR_UNSPLASH_ACCESS_KEY'; // Replace with your actual key
+const UNSPLASH_ACCESS_KEY = '__UNSPLASH_ACCESS_KEY__'; // This will be replaced during build
 const err = "Sage seems to be unavailable at the moment! Here's one of my favorite quotes:<br>"
 const fallbackQuotes = [
   "A lion doesn't bother himself with opinion of the sheep",
@@ -43,6 +43,7 @@ async function updatePage() {
     imageElement.src = imageData.imageUrl;
     creditElement.innerHTML = `Photo by <a href="${imageData.photographerProfileUrl}" target="_blank">${imageData.photographerName}</a> on <a href="https://unsplash.com" target="_blank">Unsplash</a>`;
   } else {
+    console.log("Image empty!")
     imageElement.style.display = 'none';
     creditElement.style.display = 'none';
   }
